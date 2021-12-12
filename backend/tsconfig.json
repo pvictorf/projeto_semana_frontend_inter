@@ -1,10 +1,31 @@
+/* 
+Path alias
+
+https://dev.to/larswaechter/path-aliases-with-typescript-in-nodejs-4353
+https://medium.com/@jimcraft123hd/setting-up-path-alias-in-typescript-and-tsc-build-without-error-9f1dbc0bccd2 
+*/
 {
-    "compilerOptions": {
-      "target": "es6",
-      "module": "commonjs",
-      "rootDir": "./src",
-      "outDir": "./build",
-      "esModuleInterop": true,
-      "strict": true
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "rootDir": "./src",
+    "outDir": "./build",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "noImplicitReturns": false,
+    "strict": true,
+    "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false,
+    "experimentalDecorators": true,
+    "typeRoots": [
+      "./src/@types",
+      "./@types",
+      "./node_modules/@types"
+    ],
+    "paths": {
+      "@": ["./src"], 
+      "@entities/*": ["./src/entities/*"],
+      "@resources/*": ["./src/resources/*"],
     }
-  }
+  },
+}
