@@ -1,7 +1,10 @@
-import {Request, Response, NextFunction, response} from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { AppError } from '../shared/error/AppError';
 
-function globalErrors(err: Error, request: Request, Response: Response, next: NextFunction) {
+// Necessário adicionar o express-async-error para lidar com erros de forma assincrona
+// yarn add express-async-errors
+
+function globalErrors(err: Error, request: Request, response: Response, next: NextFunction) {
   if(err instanceof AppError) {
     response.status(err.statusCode).json({
       status: 'error',
@@ -18,4 +21,4 @@ function globalErrors(err: Error, request: Request, Response: Response, next: Ne
   })
 }
 
-export { globalErrors }
+export default globalErrors

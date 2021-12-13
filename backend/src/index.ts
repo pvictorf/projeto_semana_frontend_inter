@@ -1,7 +1,10 @@
+import 'express-async-errors';
 import express from 'express';
 import routes from './routes';
-import { globalErrors } from './middlewares/globalErrors';
+import globalErrors from './middlewares/globalErrors';
 import { createConnection } from 'typeorm';
+
+
 
 createConnection().then(connection => {
   try {

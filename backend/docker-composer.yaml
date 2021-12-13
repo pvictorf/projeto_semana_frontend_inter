@@ -1,7 +1,7 @@
 # https://renatogroffe.medium.com/postgresql-pgadmin-4-docker-compose-montando-rapidamente-um-ambiente-para-uso-55a2ab230b89
 version: '3'
 services:
-  teste-postgres-compose:
+  postgres-compose:
     image: postgres
     environment:
       POSTGRES_PASSWORD: "postgres"
@@ -10,15 +10,15 @@ services:
     networks:
       - postgres-compose-network
       
-  teste-pgadmin-compose:
+  pgadmin-compose:
     image: dpage/pgadmin4
     environment:
       PGADMIN_DEFAULT_EMAIL: "pvictorferreira@hotmail.com"
       PGADMIN_DEFAULT_PASSWORD: "postgres"
     ports:
-      - "16543:80"
+      - "8080:80"
     depends_on:
-      - teste-postgres-compose
+      - postgres-compose
     networks:
       - postgres-compose-network
 
