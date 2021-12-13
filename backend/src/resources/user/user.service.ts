@@ -28,7 +28,18 @@ export class UserService {
   async signup(user: UserSignup) {
     const userRepository = getRepository(User);
 
-    console.log(user);
+    const password = await bcrypt.hash(user.password, 10);
+
+    const userData = {
+      ...user, 
+      wallet: 0,
+      accountNumber: Math.floor(Math.random() * 999999),
+      accountDigit: Math.floor(Math.random() * 99),
+    }
+
+    const newUser = await userRepository.save(userData);
+
+    console.log(newUser);
 
   }
 }

@@ -1,15 +1,18 @@
 import { 
   Entity, 
-  PrimaryColumn, 
+  PrimaryGeneratedColumn, 
   Column, 
   CreateDateColumn,
   UpdateDateColumn, 
 } from 'typeorm'
 
-@Entity() 
+@Entity('user') 
 export class User {
+
+  // [NOTE] Ao adicionar PrimaryGeneratedColumn, automáticamente o id da entidade será um hash uuid
+  // Foi necessário apagar o banco de dados pois anteriormente o id estaja interger!
   
-  @PrimaryColumn('uuid')
+  @PrimaryGeneratedColumn('uuid') 
   id: string;
 
   @Column()
