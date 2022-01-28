@@ -6,7 +6,7 @@ import { AuthService } from './../auth/auth.service';
 import { User } from '../../entities/User';
 import { UserSigninDto } from '@resources/user/dtos/user.signin.dto';
 import { UserSignupDto } from '@resources/user/dtos/user.signup.dto';
-import { AuthLoginDto } from './../auth/dtos/auth.login.dto';
+import { AuthUserDto } from '../auth/dtos/auth.user.dto';
 
 import bcrypt from 'bcrypt';
 
@@ -20,7 +20,7 @@ export class UserService {
     this.authService = new AuthService()
   }
 
-  async signin(user: UserSigninDto): Promise<AuthLoginDto> {
+  async signin(user: UserSigninDto): Promise<AuthUserDto> {
     const { email, password } = user;
     const existUser = await this.userRepository.findOne({where: { email }});
     const correctPassword = await bcrypt.compare(password ?? '', existUser?.password ?? '');
@@ -29,11 +29,11 @@ export class UserService {
       throw new AppError('Usuário não encontrado.', 401);
     }
 
-    return this.authService.login(existUser);
+    return this.authService.authenticate(existUser);
   }  
 
 
-  async signup(user: UserSignupDto) {
+  async signup(user: UserSignupDto): Promise<AuthUserDto> {
     const { email } = user;
     const existUser = await this.userRepository.findOne({where: { email }}); 
 
@@ -43,7 +43,7 @@ export class UserService {
 
     const userData = {
       ...user, 
-      wallet: 0,
+      wallet: 5000,
       accountNumber: Math.floor(Math.random() * 999999),
       accountDigit: Math.floor(Math.random() * 99),
       password: await bcrypt.hash(user.password, 10),
@@ -51,6 +51,6 @@ export class UserService {
 
     const newUser = await this.userRepository.save(userData);
 
-    return newUser;
+    return this.authService.authenticate(newUser);
   }
 }

@@ -4,15 +4,19 @@ import {
   Column, 
   CreateDateColumn,
   UpdateDateColumn, 
+  BeforeInsert
 } from 'typeorm'
 
 
-@Entity('user') 
+@Entity('users') 
 export class User {
 
-  // [NOTE] Ao adicionar PrimaryGeneratedColumn, automáticamente o id da entidade será um hash uuid
-  // Foi necessário apagar o banco de dados pois anteriormente o id estaja interger!
-  
+  @BeforeInsert()
+  updateEmail() {
+    console.log(this)
+    this.email = this.email.toLowerCase()
+  }
+
   @PrimaryGeneratedColumn('uuid') 
   id: string;
 
@@ -42,4 +46,5 @@ export class User {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
 }
