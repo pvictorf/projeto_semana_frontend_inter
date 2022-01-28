@@ -8,12 +8,13 @@
 ---
 Dependencias nescessárias
 
-Express
-typescript -D
-ts-node -D 
-@types/express -D
-@types/node -D
-nodemon -D
+Express           | npm i express express-async-errors  
+typescript -D     | npm i --save typescript -D
+ts-node -D        | npm i ts-node -D
+@types/express -D | npm i --save @types/express -D 
+@types/node -D    | npm i --save @types/node -D
+nodemon -D        | npm install nodemon -D
+
 
 
 Criando setup Ininical - Referencias.
