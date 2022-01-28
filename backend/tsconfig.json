@@ -26,6 +26,8 @@ https://medium.com/@jimcraft123hd/setting-up-path-alias-in-typescript-and-tsc-bu
       "@": ["./src"], 
       "@entities/*": ["./src/entities/*"],
       "@resources/*": ["./src/resources/*"],
+      "@config/*": ["./src/config/*"],
+      "@shared/*": ["./src/shared/*"],
     }
   },
 }
