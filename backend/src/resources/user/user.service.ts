@@ -32,6 +32,7 @@ export class UserService {
 
     const userData = {
       ...user, 
+      password,
       wallet: 0,
       accountNumber: Math.floor(Math.random() * 999999),
       accountDigit: Math.floor(Math.random() * 99),
@@ -39,7 +40,7 @@ export class UserService {
 
     const newUser = await userRepository.save(userData);
 
-    console.log(newUser);
+    return newUser
 
   }
 }
